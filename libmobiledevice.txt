@@ -1,0 +1,51 @@
+Разблочить экран
+sudo chmod -R 777 /var/db/lockdown/
+
+Снять лог
+idevicesyslog
+
+Список установленных приложений
+ideviceinstaller -l
+
+Удалить приложение
+ideviceinstaller --uninstall com.protogeo.Moves
+
+Установить приложение
+ideviceinstaller -u $UDID -i path/to/ipa
+
+Обновить приложение
+ideviceinstaller -g $UDID -i path/to/ipa
+
+Список подключенных девайсов
+idevice_id -l
+
+Инфа о девайсе
+ideviceinfo
+
+Диагностика девайса
+idevicediagnostics diagnostics All
+
+Перезагрузить девайса
+idevicediagnostics restart
+
+Изменить версию приложения
+PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" /path/to/infoPlist
+
+Вывести на экран infoPlist
+PlistBuddy -c Print "path/to/info.plist"
+
+Проверка статуса ImageSignature и ImagePresent
+ideviceimagemounter -l
+
+Вывести на экран бандл приложения
+osascript `id of app "Payload/$APP_NAME"`
+
+Запустить приложение
+idevicedebug run $BUNDLE_ID
+
+Сделать скриншот
+flick screenshot -p ios -n test
+
+Снять видео
+flick video -a start -p ios
+flick video -a stop -p ios -n test
