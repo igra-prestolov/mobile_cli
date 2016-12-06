@@ -1,0 +1,79 @@
+#connect/disconnect
+#if you use usb cable, you do not need connect to devices
+adb tcpip 5555
+adb connect [ip]
+adb disconnect [ip]
+
+#show all devices
+adb devices
+
+#sceenshots
+flick screenshot -p android -n test
+
+#video
+flick video -a start -p android
+flick video -a stop -p android -n test
+
+#all packages
+adb shell pm list packages -f [-s]
+
+#Make application system
+adb shell sh -c 'su -c cp /sdcard/file.apk /system/app/'
+
+#delete from system
+adb shell
+su
+cd system/app/
+rm [filename]
+
+#Push to device:
+adb push /path/to/local/file /mnt/sdcard/path/to/file
+
+#open settings
+adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS
+
+#open app
+adb shell am start -n com.package.name/com.package.name.ActivityName
+
+#install application
+adb install path/to/app
+
+#update application
+adb install -r path/to/app
+
+#close app
+adb shell am force-stop com.package.name
+
+#delete app
+adb uninstall com.package.name
+
+#Save log
+adb logcat -d > logcat.txt
+adb logcat -c
+
+#Check lock/display:
+adb shell dumpsys power | grep 'mHolding'
+
+#Check permissions
+aapt d permissions path/to/app
+
+#Show manifest
+aapt l -a path/to/app
+
+#Show appPackage
+aapt dump badging path/to/app | grep -o "package: name='[^']*" | awk -F "='" '{print $2}'
+
+#Show activity
+aapt dump badging path/to/app | grep -o "launchable-activity: name='[^']*" | awk -F "='" '{print $2}'
+
+#UnLock device
+adb shell input keyevent KEYCODE_POWER
+sleep 1
+if [[ `adb shell dumpsys power | grep 'mHoldingDisplaySuspendBlocker=true'` == "" ]]; then
+	adb shell input keyevent KEYCODE_POWER
+fi
+adb shell input text yourPassword
+adb shell input keyevent KEYCODE_ENTER
+
+#Create object [aapt] 
+AAPT=`ls $ANDROID_HOME/build-tools/*/aapt | tail -n1`
