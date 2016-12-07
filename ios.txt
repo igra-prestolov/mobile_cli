@@ -49,3 +49,15 @@ flick screenshot -p ios -n test
 Снять видео
 flick video -a start -p ios
 flick video -a stop -p ios -n test
+
+Очистить лог симулятора
+cp /dev/null $CoreSimulatorFolder/$UDID/system.log
+
+Запустить симулятор
+ios-sim start --devicetypeid <device package and name>
+
+Установить приложение на симуляторе
+ios-sim install <application path> --devicetypeid <device type>
+
+Запустить приложение на симуляторе
+ios-sim launch <application path> --devicetypeid <device type>
