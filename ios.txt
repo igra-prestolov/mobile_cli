@@ -61,3 +61,9 @@ ios-sim install <application path> --devicetypeid <device type>
 
 Запустить приложение на симуляторе
 ios-sim launch <application path> --devicetypeid <device type>
+
+Вывести на экран версию OS девайса
+ideviceinfo -k ProductVersion
+
+Вывести на экран версию приложения
+ideviceinstaller -l | grep $BUNDLE_ID

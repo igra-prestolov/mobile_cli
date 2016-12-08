@@ -57,3 +57,6 @@ unzip -o test.zip
 
 Убить процесс через заданное количество секунд
 gtimeout 33 adb logcat
+
+Количество символов в строке
+echo -n "test" | wc -m

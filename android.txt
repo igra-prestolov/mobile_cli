@@ -77,3 +77,6 @@ adb shell input keyevent KEYCODE_ENTER
 
 #Create object [aapt] 
 AAPT=`ls $ANDROID_HOME/build-tools/*/aapt | tail -n1`
+
+#Show app build version
+adb shell dumpsys package $PACKAGE | grep versionCode
