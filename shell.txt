@@ -2,79 +2,79 @@
 touch file.txt
 
 Предоставить полный доступ к файлу
-sudo chmod 777 file.txt
+sudo chmod 777 <file path>
 
 Калькулятор
 echo "$x / $y" | bc -ql 
 
 Вывести количество файлов в папке
-ls path/to/folder | wc -l 
+ls <folder path> | wc -l 
 
 Разъархивировать в папку
-unzip -o test.zip -d folder
+unzip -o <zip path> -d <folder path>
 
 Скопировать папку
-cp -R folder folder2/
+cp -R <folder path> <folder2 path>
 
-Скопировать файл (перезаписать если сущействует)
-cp -r -f file folder/file
+Скопировать файл (перезаписать если существует)
+cp -r -f <file path> <new file path>
 
 Создать папку (без ошибки, если папка существует)
 mkdir -p
 
 Очистить папку/удалить файл (без ошибки, если файл отсутствует)
-rm -r -f ~/folder/*
+rm -r -f ~/<folder path>/*
 
 Нарезка строк
-grep "href" | tail -c 11 | head -c 5
+grep "<string value>" | tail -c 11 | head -c 5
 
 Замена строки в файле
-cat file.txt | sed "s/^старая_строка.*/новая_строка/g" > file2.txt; mv file2.txt file.txt
+cat <file name> | sed "s/^<string value>.*/<string value>/g" > <file2 name>; mv <file2 name> <file name>
 
 Условие: если папка пустая
-if [ `ls ~/folder | wc -l` -eq 0 ]
+if [ `ls <folder path> | wc -l` -eq 0 ]
 
 Условие: если представлямый объект содержит введенный текст
-if [[ "test" == *"e"* ]]
+if [[ "<string value>" == *"e"* ]]
 
 Условие: если файл отсутствует в текущей папке
-if [[ ! -s file.txt ]]
+if [[ ! -s <file name> ]]
 
 Вывести значение запрашиваемого поля в json файле
 jq -r ".app_versions[$i] .download_url"
 
 Перезапись текст в файл
-echo "text" > file.txt
+echo "<string value>" > <file path>
 
 Дозаписать текст в файл
-echo "text" >> file.txt
+echo "<string value>" >> <file path>
 
 Скачать файл в указанное место
-curl -o имя_сохраняемого_файла -O -L линк_на_файл
+curl -o <new file path> -O -L <file link>
 
 Отправить POST запрос
-curl --request POST --user $LOGIN:$PASSWORD $LINK
+curl --request POST --user <user login>:<user password> <link url>
 
 Архивировать файл/папку
-zip -r test.zip path/to/file
+zip -r <zip path> <file path>
 
 Разархивировать файл/папку
-unzip -o test.zip
+unzip -o <zip path>
 
 Убить процесс через заданное количество секунд
-gtimeout 33 adb logcat
+gtimeout 33 <any command>
 
 Количество символов в строке
-echo -n "test" | wc -m
+echo -n "<string value> | wc -m
 
 Вывести местонахождение приложения
-which adb
+which <any program>
 
 Декодирование всех файлов в папке из base64 в utf-8
-for entry in "path/to/folder"/*
+for entry in "<folder path>"/*
 do
   echo "`base64 -D -i "$entry"`" > "$entry"
 done
 
 Просмотр джейсона Jenkins джобы
-curl --user $LOGIN:$TOCKEN http://my_jenkins_url//job/my_job_name/lastBuild/api/json
+curl --user <user login>:<user token> http://my_jenkins_url//job/my_job_name/lastBuild/api/json

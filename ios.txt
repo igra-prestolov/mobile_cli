@@ -3,18 +3,19 @@ sudo chmod -R 777 /var/db/lockdown/
 
 Снять лог
 idevicesyslog
+flick log -a start -p ios -n <log name>  =>  flick log -a stop -p ios
 
 Список установленных приложений
 ideviceinstaller -l
 
 Удалить приложение
-ideviceinstaller --uninstall com.protogeo.Moves
+ideviceinstaller --uninstall <app bundleId>
 
 Установить приложение
-ideviceinstaller -u $UDID -i path/to/ipa
+ideviceinstaller -u $UDID -i <ipa path>
 
 Обновить приложение
-ideviceinstaller -g $UDID -i path/to/ipa
+ideviceinstaller -g $UDID -i <ipa path>
 
 Список подключенных девайсов
 idevice_id -l
@@ -29,10 +30,10 @@ idevicediagnostics diagnostics All
 idevicediagnostics restart
 
 Изменить версию приложения
-PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" /path/to/infoPlist
+PlistBuddy -c "Set :CFBundleVersion $BUILD_NUMBER" <infoPlist path>
 
 Вывести на экран infoPlist
-PlistBuddy -c Print "path/to/info.plist"
+PlistBuddy -c Print "<infoPlist path>"
 
 Проверка статуса ImageSignature и ImagePresent
 ideviceimagemounter -l
@@ -44,11 +45,10 @@ osascript `id of app "Payload/$APP_NAME"`
 idevicedebug run $BUNDLE_ID
 
 Сделать скриншот
-flick screenshot -p ios -n test
+flick screenshot -p ios -n <scr name>
 
 Снять видео
-flick video -a start -p ios
-flick video -a stop -p ios -n test
+flick video -a start -p ios  => flick video -a stop -p ios -n <video name>
 
 Очистить лог симулятора
 cp /dev/null $CoreSimulatorFolder/$UDID/system.log
@@ -58,9 +58,17 @@ ios-sim start --devicetypeid <device package and name>
 
 Установить приложение на симуляторе
 ios-sim install <application path> --devicetypeid <device type>
+xcrun simctl install booted <app path>
+xcrun simctl install <device> <app path>
 
 Запустить приложение на симуляторе
-ios-sim launch <application path> --devicetypeid <device type>
+ios-sim launch <app path> --devicetypeid <device type>
+xcrun simctl launch booted <app identifier>
+xcrun simctl launch <device> <app identifier>
+
+Удалить приложение на симуляторе
+xcrun simctl uninstall booted <app identifier>
+xcrun simctl uninstall <device> <app identifier>
 
 Вывести на экран версию OS девайса
 ideviceinfo -k ProductVersion
@@ -69,4 +77,4 @@ ideviceinfo -k ProductVersion
 ideviceinstaller -l | grep $BUNDLE_ID
 
 Форматирование .app в .ipa
-mkdir Payload && mv test.app Payload && zip -r test.ipa Payload/
+mkdir Payload && mv <app path> Payload && zip -r <ipa path> Payload/

@@ -11,8 +11,7 @@ adb devices
 flick screenshot -p android -n test
 
 #video
-flick video -a start -p android
-flick video -a stop -p android -n test
+flick video -a start -p android  => flick video -a stop -p android -n <video name>
 
 #all packages
 adb shell pm list packages -f [-s]
@@ -33,38 +32,38 @@ adb push /path/to/local/file /mnt/sdcard/path/to/file
 adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS
 
 #open app
-adb shell am start -n com.package.name/com.package.name.ActivityName
+adb shell am start -n <app bundle_id>/<app activity_name>
 
 #install application
-adb install path/to/app
+adb install <app path>
 
 #update application
-adb install -r path/to/app
+adb install -r <app path>
 
 #close app
-adb shell am force-stop com.package.name
+adb shell am force-stop <app bundle_id>
 
 #delete app
-adb uninstall com.package.name
+adb uninstall <app bundle_id>
 
 #Save log
-adb logcat -d > logcat.txt
-adb logcat -c
+adb logcat -d > <log name>  =>  adb logcat -c
+flick log -a start -p android -n <log name>  =>  flick log -a stop -p android
 
 #Check lock/display:
 adb shell dumpsys power | grep 'mHolding'
 
 #Check permissions
-aapt d permissions path/to/app
+aapt d permissions <app path>
 
 #Show manifest
-aapt l -a path/to/app
+aapt l -a <app path>
 
 #Show appPackage
-aapt dump badging path/to/app | grep -o "package: name='[^']*" | awk -F "='" '{print $2}'
+aapt dump badging <app path> | grep -o "package: name='[^']*" | awk -F "='" '{print $2}'
 
 #Show activity
-aapt dump badging path/to/app | grep -o "launchable-activity: name='[^']*" | awk -F "='" '{print $2}'
+aapt dump badging <app path> | grep -o "launchable-activity: name='[^']*" | awk -F "='" '{print $2}'
 
 #UnLock device
 adb shell input keyevent KEYCODE_POWER
@@ -72,14 +71,14 @@ sleep 1
 if [[ `adb shell dumpsys power | grep 'mHoldingDisplaySuspendBlocker=true'` == "" ]]; then
 	adb shell input keyevent KEYCODE_POWER
 fi
-adb shell input text yourPassword
+adb shell input text <password>
 adb shell input keyevent KEYCODE_ENTER
 
 #Create object [aapt] 
 AAPT=`ls $ANDROID_HOME/build-tools/*/aapt | tail -n1`
 
 #Show app build version
-adb shell dumpsys package $PACKAGE | grep versionCode
+adb shell dumpsys package <app bundle_id> | grep versionCode
 
 #Show android properties list
 adb shell getprop
