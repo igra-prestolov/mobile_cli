@@ -80,3 +80,6 @@ AAPT=`ls $ANDROID_HOME/build-tools/*/aapt | tail -n1`
 
 #Show app build version
 adb shell dumpsys package $PACKAGE | grep versionCode
+
+#Show android properties list
+adb shell getprop

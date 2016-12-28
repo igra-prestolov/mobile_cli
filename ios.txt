@@ -67,3 +67,6 @@ ideviceinfo -k ProductVersion
 
 Вывести на экран версию приложения
 ideviceinstaller -l | grep $BUNDLE_ID
+
+Форматирование .app в .ipa
+mkdir Payload && mv test.app Payload && zip -r test.ipa Payload/
