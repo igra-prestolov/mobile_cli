@@ -78,3 +78,6 @@ ideviceinstaller -l | grep $BUNDLE_ID
 
 Форматирование .app в .ipa
 mkdir Payload && mv <app path> Payload && zip -r <ipa path> Payload/
+
+iOS Инспектор
+app-inspector -u <UDID>

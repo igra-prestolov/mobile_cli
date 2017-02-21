@@ -82,3 +82,20 @@ adb shell dumpsys package <app bundle_id> | grep versionCode
 
 #Show android properties list
 adb shell getprop
+
+#Show json info about app in play store
+https://androidquery.appspot.com/api/market?app=<app_package>
+
+#Download app from play store
+gplaycli -d <app_package> -f <folder_path>
+gp-download <app_package> > <apk_name>
+
+#Get gplay app version
+gp-bulk-details <app_package> | jq -r ".[0] .details.appDetails.versionString"
+gp-bulk-details <app_package> | jq -r ".[0] .details.appDetails.versionCode"
+
+#Get time in ms («*1000» for unixtime type)
+adb shell date +%s
+
+#Get android_id
+adb shell settings get secure android_id

@@ -28,6 +28,9 @@ rm -r -f ~/<folder path>/*
 Нарезка строк
 grep "<string value>" | tail -c 11 | head -c 5
 
+Переименовать файл
+mv <file name> <file2 name>
+
 Замена строки в файле
 cat <file name> | sed "s/^<string value>.*/<string value>/g" > <file2 name>; mv <file2 name> <file name>
 
@@ -76,5 +79,8 @@ do
   echo "`base64 -D -i "$entry"`" > "$entry"
 done
 
-Просмотр джейсона Jenkins джобы
-curl --user <user login>:<user token> http://my_jenkins_url//job/my_job_name/lastBuild/api/json
+Скопировать только определенные файлы, сохранив структуру папок
+find path/to/old/folder -name '*.json' | cpio -pdm  path/to/new/folder
+
+Просмотр занятых сетевых портов
+lsof -Pn -i4
