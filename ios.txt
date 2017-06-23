@@ -15,7 +15,7 @@ ideviceinstaller --uninstall <app bundleId>
 ideviceinstaller -u $UDID -i <ipa path>
 
 Обновить приложение
-ideviceinstaller -g $UDID -i <ipa path>
+ideviceinstaller -u $UDID -g <ipa path>
 
 Список подключенных девайсов
 idevice_id -l
@@ -70,6 +70,7 @@ xcrun simctl launch <device> <app identifier>
 xcrun simctl uninstall booted <app identifier>
 xcrun simctl uninstall <device> <app identifier>
 
+
 Вывести на экран версию OS девайса
 ideviceinfo -k ProductVersion
 
@@ -81,3 +82,20 @@ mkdir Payload && mv <app path> Payload && zip -r <ipa path> Payload/
 
 iOS Инспектор
 app-inspector -u <UDID>
+
+Запуск нескольких инстансов ios симуляторов
+open -n /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/ --args -CurrentDeviceUDID '<device udid>'
+
+Запуск симулятора (если инстанс уже есть, ничего не происходит)
+xcrun instruments -w "<UDID>" -s
+
+Информация о приложении в App Store
+- информация о текущей версии: http://itunes.apple.com/ru/lookup?id=<your_id>
+- информация о всех версиях: 	 https://itunes.apple.com/ru/rss/customerreviews/id=<your_id>/json
+
+Вывести инфо о симуляторе
+xcrun instruments -s devices | grep <udid>
+
+Обновить idevicelib для ios10
+brew install -v --HEAD --fresh --build-from-source libimobiledevice
+brew install -v --HEAD --fresh --build-from-source ios-deploy

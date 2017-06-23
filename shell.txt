@@ -70,6 +70,9 @@ gtimeout 33 <any command>
 Количество символов в строке
 echo -n "<string value> | wc -m
 
+Количество строк
+echo -n "<string value> | wc -l
+
 Вывести местонахождение приложения
 which <any program>
 
@@ -84,3 +87,103 @@ find path/to/old/folder -name '*.json' | cpio -pdm  path/to/new/folder
 
 Просмотр занятых сетевых портов
 lsof -Pn -i4
+
+Грепаем из String
+grep 'hello' <<< 'hello world'
+
+Показать вторую и третью строки
+| sed -n -e 2,3p
+
+Обрезать текст с конца до последнего символа '/'
+| awk '{print $NF}' FS=/ 
+
+Обрезать текст после первого символа '/'
+| cut -f1 -d’/‘
+
+Вывести на экран имена всех файлов в папке, имя которых заканчивается на test.txt
+find <folder path> -iname '*test.txt'
+
+Удалить все пробелы
+| tr -d ' '
+
+Очистить корзину
+rm -rf ~/.Trash/*
+
+Замена текста в файле
+sed -i '' "s/old text/new text/g" <file path here>
+
+Сохранить все запросы с указанного IP в формате json
+tshark -i en0 -Y "ip.src == $IP» -T json -x > <json_name.json>
+
+Освобождает терминал для других задач
+command &
+
+Сколько весит каждый файл в папке по отдельности
+sudo du -sh /*
+
+Все ip адреса хоста
+nslookup www.google.ru
+
+Заменить все пробелы на \n в файле
+perl -p -i -e 's/\s/\n/g' file
+
+Удалить дубликаты
+sort file.log | uniq -u
+
+Искать все, кроме выбранной строки
+grep -v
+
+Обрезать строку с конца на 4 символа
+line=$(sed 's/.\{4\}$//' <<< "$line")
+
+Использовать все файлы в папке
+for entry in *; do
+  adb install -r $entry
+done
+
+Найти все файлы в папке
+find . -name '*.txt'
+
+Вывести имя базового файла с типом
+filename=$(basename "$fullfile")
+Обрезать его тип
+extension="${filename##*.}"
+Обрезать имя
+filename="${filename%.*}"
+
+Вывести все переменные функции
+echo $@
+
+Вывести количество всех переменных функции
+echo $#
+
+Вывести каждый параметр по очереди
+for (( i=1; i < $#; ++i )); do 
+echo $@ | cut -f${i} -d ' '
+
+Проверка, существует ли файл
+-f <file path>
+
+Проверка, существует ли файл и не пустой ли он
+-s <file path>
+
+Записать текст в файл с переходами на новую строку
+cat > test.txt << EOF
+text
+text
+EOF
+
+Вывести текст с 4 строки
+tail +4
+
+Вывести 4 последние строки
+tail -4
+
+Вывести 5 строк после текста "test"
+grep -A5 "test"
+
+Вывести 5 строк до текста "test"
+grep -B5 "test"
+
+Удалить последнюю строку
+sed -ne '$q;p'

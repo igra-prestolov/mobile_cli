@@ -99,3 +99,25 @@ adb shell date +%s
 
 #Get android_id
 adb shell settings get secure android_id
+
+#Android Inspector
+uiautomator
+
+#Go to homepage
+adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME
+
+# Clear data
+adb shell pm clear <package name>
+
+# Set permission
+adb shell pm grant my.awesome.package.name android.permission.PERMISSION_THAT_YOU_NEED
+
+# Unzip apk
+apktool d <apk_name>
+
+# Grand all apk permissions to device
+aapt d permissions <apk_path> \
+  | sed -n \
+    -e "s/'//g" \
+    -e "/^uses-permission: name=android.permission\./s/^[^=]*=//p" \
+  | xargs -n 1 adb shell pm grant <app_package>
