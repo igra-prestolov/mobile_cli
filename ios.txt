@@ -99,3 +99,14 @@ xcrun instruments -s devices | grep <udid>
 Обновить idevicelib для ios10
 brew install -v --HEAD --fresh --build-from-source libimobiledevice
 brew install -v --HEAD --fresh --build-from-source ios-deploy
+
+Получить bundle_id приложения
+mdls -name kMDItemCFBundleIdentifier -r SomeApp.app
+/usr/libexec/PlistBuddy -c 'Print CFBundleIdentifier' /Applications/SomeApp.app/Info.plist
+
+Показать BuildSettings таргета
+xcodebuild -target <target> -configuration <configuration> -showBuildSettings
+
+Установить значение требуемого парамтера BuildSettings
+xcodebuild -target <target> -configuration <configuration> ${KEY}=<value>
+
