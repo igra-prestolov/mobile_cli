@@ -110,3 +110,11 @@ xcodebuild -target <target> -configuration <configuration> -showBuildSettings
 Установить значение требуемого парамтера BuildSettings
 xcodebuild -target <target> -configuration <configuration> ${KEY}=<value>
 
+Показать версию iOS
+ideviceinfo -u <udid> -k ProductVersion
+
+Отключить обновление на iOS
+https://github.com/suisreaction/SUISReaction.github.io/blob/master/app/tvos10.mobileconfig
+
+xcodebuild -destination
+http://www.mokacoding.com/blog/xcodebuild-destination-options/

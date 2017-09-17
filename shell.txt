@@ -46,6 +46,9 @@ if [[ ! -s <file name> ]]
 Вывести значение запрашиваемого поля в json файле
 jq -r ".app_versions[$i] .download_url"
 
+Установить значение запрашиваемого поля в json файле
+jq -r ".download_url = <download_url>"
+
 Перезапись текст в файл
 echo "<string value>" > <file path>
 
@@ -133,6 +136,9 @@ nslookup www.google.ru
 Заменить все пробелы на \n в файле
 perl -p -i -e 's/\s/\n/g' file
 
+Заменить все пробелы на \n в строке
+perl -p -e 's/1/2/g' <<< "test me"
+
 Удалить дубликаты
 sort file.log | uniq -u
 
@@ -199,3 +205,15 @@ tree
 
 Добавить любой символ в начало каждой строки файла
 awk '{print "SUF"$0}' <file>
+
+Экранировать слэш в строке/файле
+sed 's/\//\\\//g'
+
+Unix time
+date +'%s'
+
+Размер файла
+du -k "<file_name>"  | cut -f1
+
+Показать статус сервера
+curl -o -I -L -s -w "%{http_code}\n" <server_url>

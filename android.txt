@@ -121,3 +121,16 @@ aapt d permissions <apk_path> \
     -e "s/'//g" \
     -e "/^uses-permission: name=android.permission\./s/^[^=]*=//p" \
   | xargs -n 1 adb shell pm grant <app_package>
+
+# Get android version
+adb shell getprop ro.build.version.release 
+
+# Get curren wifi
+adb shell dumpsys netstats | grep 'networkId' | grep -v 'uid=-1'
+
+# Turned on/off wifi
+adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings
+adb shell input keyevent 19 & adb shell input keyevent 19 & adb shell input keyevent 23
+
+# Tap
+adb shell input tap X Y
