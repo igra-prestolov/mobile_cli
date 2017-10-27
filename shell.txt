@@ -74,7 +74,7 @@ gtimeout 33 <any command>
 echo -n "<string value> | wc -m
 
 Количество строк
-echo -n "<string value> | wc -l
+wc -l <file> | sed s/[^0-9]//g
 
 Вывести местонахождение приложения
 which <any program>
@@ -97,7 +97,7 @@ grep 'hello' <<< 'hello world'
 Показать вторую и третью строки
 | sed -n -e 2,3p
 
-Обрезать текст с конца до последнего символа '/'
+Вырезать текст с конца до последнего символа '/'
 | awk '{print $NF}' FS=/ 
 
 Обрезать текст после первого символа '/'
@@ -217,3 +217,10 @@ du -k "<file_name>"  | cut -f1
 
 Показать статус сервера
 curl -o -I -L -s -w "%{http_code}\n" <server_url>
+
+Вырезать из string цифры и точки
+| tr -dc "0-9."
+
+Изменить регистр
+tr '[:lower:]' '[:upper:]'
+tr '[:upper:]' '[:lower:]'
