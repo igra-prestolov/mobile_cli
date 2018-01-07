@@ -215,6 +215,9 @@ date +'%s'
 Размер файла
 du -k "<file_name>"  | cut -f1
 
+Размер файлов в папке
+du -h <your_dir>
+
 Показать статус сервера
 curl -o -I -L -s -w "%{http_code}\n" <server_url>
 
@@ -224,3 +227,9 @@ curl -o -I -L -s -w "%{http_code}\n" <server_url>
 Изменить регистр
 tr '[:lower:]' '[:upper:]'
 tr '[:upper:]' '[:lower:]'
+
+Обновить macOS в фоне
+sudo softwareupdate -ia && sudo reboot
+
+Возвращает статус 0 || 1, в зависимости от contains
+echo <text> | grep --quiet <value>
