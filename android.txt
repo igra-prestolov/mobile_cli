@@ -4,59 +4,59 @@ adb tcpip 5555
 adb connect [ip]
 adb disconnect [ip]
 
-#show all devices
+# Показать подключенные устройсва
 adb devices
 
-#sceenshots
+# Скриншот
 flick screenshot -p android -n test
 
-#video
+# Видео
 flick video -a start -p android  => flick video -a stop -p android -n <video name>
 
-#all packages
+# Показать все установленные приложения
 adb shell pm list packages -f [-s]
 
-#Push to device:
+# Отправить на девайс
 adb push /path/to/local/file /mnt/sdcard/path/to/file
 
-#open settings
+# Открыть настройки (UI)
 adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS
 
-#open app
+# Открыть приложение
 adb shell am start -n <app bundle_id>/<app activity_name>
 
-#install application
+# Установить приложение
 adb install <app path>
 
-#update application
+# Обновить приложение
 adb install -r <app path>
 
-#close app
+# Закрыть приложение
 adb shell am force-stop com.android.vending
 
-#delete app
+# Удалить приложение
 adb uninstall <app bundle_id>
 
-#Save log
+# Лог
 adb logcat -d > <log name>  =>  adb logcat -c
 flick log -a start -p android -n <log name>  =>  flick log -a stop -p android
 
-#Check lock/display:
+# Показать статус дисплея: lock/display:
 adb shell dumpsys power | grep 'mHolding'
 
-#Check permissions
+# Показать permissions приложения
 aapt d permissions <app path>
 
-#Show manifest
+# Показать манифест приложениz
 aapt l -a <app path>
 
-#Show app bundleId
+# Показать bundleId приложениz
 aapt dump badging <app path> | grep -o "package: name='[^']*" | awk -F "='" '{print $2}'
 
-#Show app activity
+# Показать launch-activity приложениz
 aapt dump badging <app path> | grep -o "launchable-activity: name='[^']*" | awk -F "='" '{print $2}'
 
-#UnLock device
+# Разблокировать девайс
 adb shell input keyevent KEYCODE_POWER
 sleep 1
 if [[ `adb shell dumpsys power | grep 'mHoldingDisplaySuspendBlocker=true'` == "" ]]; then
@@ -65,42 +65,42 @@ fi
 adb shell input text <password>
 adb shell input keyevent KEYCODE_ENTER
 
-#Create object [aapt]
+# Положить aapt в переменную
 AAPT=`ls $ANDROID_HOME/build-tools/*/aapt | tail -n1`
 
-#Show app build version
+# Показать build version приложения
 adb shell dumpsys package <app bundle_id> | grep versionCode
 
-#Show android properties list
+# Показать список properties
 adb shell getprop
 
-#Show json info about app in play store
+# Показать информацию о приложении в play store
 https://androidquery.appspot.com/api/market?app=<app_package>
 
-#Download app from play store
-gplaycli -d <app_package> -f <folder_path>
+# Скачать приложение из play store
 gp-download <app_package> > <apk_name>
+gplaycli -d <app_package> -f <folder_path>
 
-#Get gplay app version
+# Показать версию приложения в play store
 gp-bulk-details <app_package> | jq -r ".[0] .details.appDetails.versionString"
 gp-bulk-details <app_package> | jq -r ".[0] .details.appDetails.versionCode"
 
-#Get time in ms («*1000» for unixtime type)
+# Показать время на девайсе в ms («*1000» for unixtime type)
 adb shell date +%s
 
-#Get android_id
+# Показать android_id
 adb shell settings get secure android_id
 
-#Android Inspector
+# Android Inspector
 uiautomator
 
-#Go to homepage
+# Перейти на стартовую страницу (UI)
 adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME
 
-# Clear data
+# Очистить девайс (clear data)
 adb shell pm clear <package name>
 
-# Set permission
+# Установить permission
 adb shell pm grant my.awesome.package.name android.permission.PERMISSION_THAT_YOU_NEED
 
 # Unzip apk
@@ -113,13 +113,13 @@ aapt d permissions <apk_path> \
     -e "/^uses-permission: name=android.permission\./s/^[^=]*=//p" \
   | xargs -n 1 adb shell pm grant <app_package>
 
-# Get android version
+# Показать версию Android
 adb shell getprop ro.build.version.release
 
-# Get curren wifi
+# Показать текушую wifi
 adb shell dumpsys netstats | grep 'networkId' | grep -v 'uid=-1'
 
-# Turned on/off wifi
+# Вкл/выкл wifi (UI)
 adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings
 adb shell input keyevent 19 & adb shell input keyevent 19 & adb shell input keyevent 23
 adb shell input keyevent 19 & adb shell input keyevent 19 & adb shell input keyevent 23
@@ -127,11 +127,11 @@ adb shell input keyevent 19 & adb shell input keyevent 19 & adb shell input keye
 # Tap
 adb shell input tap X Y
 
-# Send referrer
+# Отправить referrer
 bundleId=`aapt dump badging <apk_path> | grep -o "package: name='[^']*" | awk -F "='" '{print $2}'`
 adb shell am broadcast -a com.android.vending.INSTALL_REFERRER  -n  <bundle_id>/<app_receiver> --es referrer WTxqp%3DACaLv%26mt_deeplink%3DHsBVy%3A%2F%2FKYZOE.pvgrN
 
-# Download apk from device
+# Выгрузить apk с девайса
 apk=`adb shell pm path <your_bundle>`; apk=`echo $apk | awk '{print $NF}' FS=':' | tr -d '\r\n'`; adb pull $apk <path/to/save>
 
 # Grep errors
