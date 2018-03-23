@@ -5,10 +5,10 @@ touch file.txt
 sudo chmod 777 <file path>
 
 Калькулятор
-echo "$x / $y" | bc -ql 
+echo "$x / $y" | bc -ql
 
 Вывести количество файлов в папке
-ls <folder path> | wc -l 
+ls <folder path> | wc -l
 
 Разъархивировать в папку
 unzip -o <zip path> -d <folder path>
@@ -48,6 +48,9 @@ jq -r ".app_versions[$i] .download_url"
 
 Установить значение запрашиваемого поля в json файле
 jq -r ".download_url = <download_url>"
+
+Удалить кавычки в получаемом результате от jq
+jq -r
 
 Перезапись текст в файл
 echo "<string value>" > <file path>
@@ -98,7 +101,7 @@ grep 'hello' <<< 'hello world'
 | sed -n -e 2,3p
 
 Вырезать текст с конца до последнего символа '/'
-| awk '{print $NF}' FS=/ 
+| awk '{print $NF}' FS=/
 
 Обрезать текст после первого символа '/'
 | cut -f1 -d '/'
@@ -170,7 +173,7 @@ echo $@
 echo $#
 
 Вывести каждый параметр по очереди
-for (( i=1; i < $#; ++i )); do 
+for (( i=1; i < $#; ++i )); do
 echo $@ | cut -f${i} -d ' '
 
 Проверка, существует ли файл
@@ -233,3 +236,9 @@ sudo softwareupdate -ia && sudo reboot
 
 Возвращает статус 0 || 1, в зависимости от contains
 echo <text> | grep --quiet <value>
+
+Узнать, кем занят порт
+lsof -i tcp:4567
+
+Показать String со спецсимволами, если они имеются
+| od -c
