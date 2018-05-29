@@ -53,8 +53,9 @@ aapt l -a <app path>
 # Показать bundleId приложениz
 aapt dump badging <app path> | grep -o "package: name='[^']*" | awk -F "='" '{print $2}'
 
-# Показать launch-activity приложениz
+# Показать launch-activity приложения
 aapt dump badging <app path> | grep -o "launchable-activity: name='[^']*" | awk -F "='" '{print $2}'
+или запустить приложение и грепнуть лог
 
 # Разблокировать девайс
 adb shell input keyevent KEYCODE_POWER

@@ -121,3 +121,9 @@ https://github.com/suisreaction/SUISReaction.github.io/blob/master/app/tvos10.mo
 
 xcodebuild -destination
 http://www.mokacoding.com/blog/xcodebuild-destination-options/
+
+Вывести путь до песочнецы конкретного симулятора
+xcrun simctl get_app_container <udid> <bundle_id>
+
+Дернуть диплинк на симуляторе
+xcrun simctl openurl booted "https://www.example.com/content?id=2"
