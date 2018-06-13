@@ -127,3 +127,13 @@ xcrun simctl get_app_container <udid> <bundle_id>
 
 Дернуть диплинк на симуляторе
 xcrun simctl openurl booted "https://www.example.com/content?id=2"
+
+XCUITest диплинки
+let url = "sms://"
+let safari = XCUIApplication(bundleIdentifier: "com.apple.mobilesafari")
+safari.launch()
+waitElement(safari.buttons["URL"]).tap()
+safari.textFields["URL"].buttons.firstMatch.tap()
+safari.textFields["URL"].typeText(url)
+safari.buttons["Go"].tap()
+safari.buttons.element(matching: NSPredicate(format: "label like 'Открыть' OR label like 'Open'")).tap()

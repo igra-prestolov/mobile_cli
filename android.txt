@@ -144,3 +144,41 @@ adb shell echo \$EPOCHREALTIME
 # Грепнуть лог конкретного приложения
 adb -d logcat <your package name>:<log level> *:S
 example: adb -d logcat com.example.example:I *:S
+
+# Установить автоматическую ориентацию экрана
+adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:1
+
+# Установить portrait
+adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:
+adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0
+
+# Установить landscape
+adb shell content insert --uri content://settings/system --bind name:s:accelerometer_rotation --bind value:i:0
+adb shell content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1
+
+# Запуск симулятора без отображения и звука
+emulator @emu_name -no-window -no-boot-anim -noaudio &
+
+# Установить android образы
+yes | sdkmanager "system-images;android-26;google_apis;x86"
+yes | sdkmanager --licenses
+
+# Выключить анимацию на устройстве
+adb shell settings put global transition_animation_scale 0.0
+adb shell settings put global window_animation_scale 0.0
+adb shell settings put global animator_duration_scale 0.0
+
+# Ожидаение запуска симулятора
+adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 2; done'
+
+# Пример установки симулятора
+avdmanager create avd -n "Pixel_8.0.0" -d "pixel" -c "100M" -f -k "system-images;android-26;google_apis;x86"
+
+# Пример удаления симулятора
+avdmanager delete avd -n "Pixel_8.0.0"
+
+# Список созданных симуляторов
+emulator -list-avds
+
+# Список симуляторов доступных для создания
+avdmanager list
