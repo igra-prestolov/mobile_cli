@@ -172,7 +172,7 @@ adb shell settings put global animator_duration_scale 0.0
 adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 2; done'
 
 # Пример установки симулятора
-avdmanager create avd -n "Pixel_8.0.0" -d "pixel" -c "100M" -f -k "system-images;android-26;google_apis;x86"
+avdmanager create avd -n "Pixel_8.0.0" -d "pixel" -c "100M" -f -k "system-images;android-26;google_apis_playstore;x86"
 
 # Пример удаления симулятора
 avdmanager delete avd -n "Pixel_8.0.0"
@@ -182,3 +182,16 @@ emulator -list-avds
 
 # Список симуляторов доступных для создания
 avdmanager list
+
+# Запустить adb с правами root
+adb root
+
+# Вывести advertising_id
+adb root
+adb shell grep adid_key /data/data/com.google.android.gms/shared_prefs/adid_settings.xml
+
+# Включить play store на симуляторе
+sed -i '' "/^PlayStore.enabled=/s/=.*/=true/" ~/.android/avd/<avd_name>.avd/config.ini
+
+# Unlock screen
+adb shell input keyevent 82
