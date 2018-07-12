@@ -249,3 +249,6 @@ ls & pwd
 Вырезать текст с помощью regexp
 end_symbol=";"
 perl -nE 'say $1 if /get_some_value_after=(.*?)\$end_symbol/' <<< $string
+
+Поиск слова в папке с файлами
+grep -rl 'word' .
